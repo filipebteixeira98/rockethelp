@@ -7,6 +7,8 @@ import {
 
 import { THEME } from './src/styles/theme';
 
+import { SignIn } from './src/screens/SignIn';
+
 import { Loading } from './src/components/Loading';
 
 export default function App() {
@@ -15,10 +17,6 @@ export default function App() {
     Roboto_700Bold,
   });
 
-  if (!fontsLoaded) {
-    return <Loading />;
-  }
-
   return (
     <NativeBaseProvider theme={THEME}>
       <StatusBar
@@ -26,6 +24,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
+      {fontsLoaded ? <SignIn /> : <Loading />}
     </NativeBaseProvider>
   );
 }
