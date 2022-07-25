@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   VStack,
   HStack,
@@ -13,6 +14,10 @@ import Logo from '../assets/logo_secondary.svg';
 import { Filter } from '../components/Filter';
 
 export function Home() {
+  const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>(
+    'open'
+  );
+
   const { colors } = useTheme();
 
   return (
@@ -41,8 +46,18 @@ export function Home() {
           <Text color="gray.200">1</Text>
         </HStack>
         <HStack space={3} mb={8}>
-          <Filter type="open" title="in progress" />
-          <Filter type="closed" title="finalized" />
+          <Filter
+            type="open"
+            title="in progress"
+            onPress={() => setStatusSelected('open')}
+            isActive={statusSelected === 'open'}
+          />
+          <Filter
+            type="closed"
+            title="finalized"
+            onPress={() => setStatusSelected('closed')}
+            isActive={statusSelected === 'closed'}
+          />
         </HStack>
       </VStack>
     </VStack>
