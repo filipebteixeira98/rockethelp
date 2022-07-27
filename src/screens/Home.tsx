@@ -6,9 +6,10 @@ import {
   Text,
   Heading,
   FlatList,
+  Center,
   useTheme,
 } from 'native-base';
-import { SignOut } from 'phosphor-react-native';
+import { SignOut, ChatTeardropText } from 'phosphor-react-native';
 
 import Logo from '../assets/logo_secondary.svg';
 
@@ -77,6 +78,15 @@ export function Home() {
           renderItem={({ item }) => <Order data={item} />}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 100 }}
+          ListEmptyComponent={() => (
+            <Center>
+              <ChatTeardropText color={colors.gray[300]} size={40} />
+              <Text color="gray.300" fontSize="xl" mt={6} textAlign="center">
+                You still do not have {'\n'}
+                requests {statusSelected === 'open' ? 'in progress' : 'ended'}
+              </Text>
+            </Center>
+          )}
         />
         <Button title="New request" />
       </VStack>
