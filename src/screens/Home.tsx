@@ -10,6 +10,7 @@ import {
   useTheme,
 } from 'native-base';
 import { SignOut, ChatTeardropText } from 'phosphor-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import Logo from '../assets/logo_secondary.svg';
 
@@ -32,6 +33,12 @@ export function Home() {
   ]);
 
   const { colors } = useTheme();
+
+  const navigation = useNavigation();
+
+  function handleNewOrder() {
+    navigation.navigate('new');
+  }
 
   return (
     <VStack flex={1} pb={6} bg="gray.700">
@@ -88,7 +95,7 @@ export function Home() {
             </Center>
           )}
         />
-        <Button title="New request" />
+        <Button title="New request" onPress={handleNewOrder} />
       </VStack>
     </VStack>
   );
