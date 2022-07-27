@@ -5,6 +5,7 @@ import {
   IconButton,
   Text,
   Heading,
+  FlatList,
   useTheme,
 } from 'native-base';
 import { SignOut } from 'phosphor-react-native';
@@ -12,11 +13,22 @@ import { SignOut } from 'phosphor-react-native';
 import Logo from '../assets/logo_secondary.svg';
 
 import { Filter } from '../components/Filter';
+import { Order, OrderProps } from '../components/Order';
+import { Button } from '../components/Button';
 
 export function Home() {
   const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>(
     'open'
   );
+
+  const [orders, setOrders] = useState<OrderProps[]>([
+    {
+      id: 'fab8jgy786hgs',
+      patrimony: '97894978',
+      when: '03/21/2023 7:00 p.m',
+      status: 'open',
+    },
+  ]);
 
   const { colors } = useTheme();
 
@@ -59,6 +71,14 @@ export function Home() {
             isActive={statusSelected === 'closed'}
           />
         </HStack>
+        <FlatList
+          data={orders}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <Order data={item} />}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 }}
+        />
+        <Button title="New request" />
       </VStack>
     </VStack>
   );
